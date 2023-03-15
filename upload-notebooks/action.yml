@@ -34,6 +34,6 @@ runs:
         for notebook in ${{ inputs.notebooks }}
         do
           echo "Uploading $notebook"
-          "$RUNNER_TEMP/pyenv/bin/python" upload-notebook.py "$notebook"
+          "$RUNNER_TEMP/pyenv/bin/python" "${{ github.action_path }}/upload-notebook.py" "$notebook"
         done
       shell: bash
