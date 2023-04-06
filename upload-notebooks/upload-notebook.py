@@ -22,7 +22,8 @@ namespace = os.environ.get("TILEDB_CLOUD_NAMESPACE")
 storage_path = os.environ.get("TILEDB_CLOUD_STORAGE_PATH")
 storage_credential_name = os.environ.get("TILEDB_CLOUD_STORAGE_CREDENTIAL_NAME")
 
-tiledb.cloud.login(token=token)
+if tiledb.cloud.Config()['rest.token'] == '':
+    tiledb.cloud.login(token=token)
 user = tiledb.cloud.user_profile()
 sys.stdout.write("Logged into TileDB Cloud as %s\n" % (user.username))
 
