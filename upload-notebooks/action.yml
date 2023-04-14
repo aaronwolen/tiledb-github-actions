@@ -23,6 +23,7 @@ runs:
       run: |
         python -m venv "$RUNNER_TEMP/pyenv"
         "$RUNNER_TEMP/pyenv/bin/pip" install tiledb-cloud
+        "$RUNNER_TEMP/pyenv/bin/pip" list
       shell: bash
     - name: Upload notebooks
       env:
