@@ -32,7 +32,8 @@ runs:
         TILEDB_CLOUD_STORAGE_PATH:  ${{ inputs.TILEDB_CLOUD_STORAGE_PATH }}
         TILEDB_CLOUD_STORAGE_CREDENTIAL_NAME:  ${{ inputs.TILEDB_CLOUD_STORAGE_CREDENTIAL_NAME }}
       run: |
-        for notebook in ${{ inputs.notebooks }}
+        readarray -t notebooks <<<"${{ inputs.notebooks }}"
+        for notebook in ${notebooks[@]}
         do
           echo "Uploading $notebook"
           "$RUNNER_TEMP/pyenv/bin/python" "${{ github.action_path }}/upload-notebook.py" "$notebook"
