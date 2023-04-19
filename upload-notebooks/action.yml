@@ -35,6 +35,7 @@ runs:
         readarray -t notebooks <<< "${{ inputs.notebooks }}"
         for notebook in "${notebooks[@]}"
         do
+          [[ -z "$notebook" ]] && continue # skip empty lines
           echo "Uploading $notebook"
           "$RUNNER_TEMP/pyenv/bin/python" "${{ github.action_path }}/upload-notebook.py" "$notebook"
         done
