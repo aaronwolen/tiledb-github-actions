@@ -32,6 +32,7 @@ runs:
         TILEDB_CLOUD_STORAGE_PATH:  ${{ inputs.TILEDB_CLOUD_STORAGE_PATH }}
         TILEDB_CLOUD_STORAGE_CREDENTIAL_NAME:  ${{ inputs.TILEDB_CLOUD_STORAGE_CREDENTIAL_NAME }}
       run: |
+        printenv
         readarray -t notebooks <<< "${{ inputs.notebooks }}"
         for notebook in "${notebooks[@]}"
         do
