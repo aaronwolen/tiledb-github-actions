@@ -62,40 +62,42 @@ storage_credential_name = args.tiledb_cloud_storage_credential_name
 
 # Verify input
 if not os.path.exists(notebook):
-    sys.stderr.write("Error: Notebook file does not exist: %s\n" % (notebook))
+    print(f"Error: Notebook file {notebook!r} does not exist", file=sys.stderr)
     sys.exit(1)
 
 notebook_name, ext = os.path.splitext(notebook)
 notebook_name = os.path.basename(notebook_name)
 if ext != ".ipynb":
-    sys.stderr.write(
-        "Error: Notebook file extension must be '.ipynb', not '%s'\n" % (ext)
+    print(
+        f"Error: Notebook file extension must be '.ipynb', not {ext!r}", file=sys.stderr
     )
     sys.exit(1)
 
 if token is None:
-    sys.stderr.write("Error: Missing API token\n")
-    sys.stderr.write(
-        "You must define the token as the env var TILEDB_CLOUD_TOKEN or pass it to --tiledb-cloud-token\n"
+    print("Error: Missing API token", file=sys.stderr)
+    print(
+        "You must define the token as the env var TILEDB_CLOUD_TOKEN or pass it to --tiledb-cloud-token",
+        file=sys.stderr,
     )
     sys.exit(1)
 
 if namespace is None:
-    sys.stderr.write("Error: Missing namespace\n")
-    sys.stderr.write(
-        "You must define the namespace as the env var TILEDB_CLOUD_NAMESPACE or pass it to --tiledb-cloud-namespace\n"
+    print("Error: Missing namespace", file=sys.stderr)
+    print(
+        "You must define the namespace as the env var TILEDB_CLOUD_NAMESPACE or pass it to --tiledb-cloud-namespace",
+        file=sys.stderr,
     )
     sys.exit(1)
 
 # Login and upload
 tiledb.cloud.login(token=token)
-sys.stderr.write("Info: Notebook to upload is %s\n" % (notebook))
-sys.stderr.write("Info: Namespace is %s\n" % (namespace))
+print(f"Info: Notebook to upload is {notebook!r}", file=sys.stderr)
+print(f"Info: Namespace is {namespace!r}", file=sys.stderr)
 if storage_path is not None:
-    sys.stderr.write("Info: Storage path is %s\n" % (storage_path))
+    print(f"Info: Storage path is {storage_path!r}", file=sys.stderr)
 if storage_credential_name is not None:
-    sys.stderr.write(
-        "Info: Storage credential name is %s\n" % (storage_credential_name)
+    print(
+        f"Info: Storage credential name is {storage_credential_name!r}", file=sys.stderr
     )
 
 try:
